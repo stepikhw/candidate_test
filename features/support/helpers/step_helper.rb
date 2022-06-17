@@ -15,3 +15,13 @@ def find_user_id(users_information:, user_login:)
 
   users_id.first
 end
+
+def get_user_attribute(users_information:, user_login:, attribute:)
+  result = nil
+  users_information.each do |user|
+    next unless user['login'] == user_login
+    result = user[attribute]
+  end
+  raise "Пользователь #{user_login}: не удалось получить значение атрибута #{attribute}" unless result != nil
+  result
+end
