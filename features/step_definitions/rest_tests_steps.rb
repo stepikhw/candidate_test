@@ -65,6 +65,7 @@ end
 
 # Значение атрибута "active" можно было бы проверять на соответствие шаблону (0|1).
 When(/^изменяю (имя|фамилию|атрибут \"active\") пользователя с логином (\w+\.\w+) на (\w+)$/) do |parameter, login, new_value|
+  raise "Пользователь с логином #{login} не существует" unless @scenario_data.users_id[login] != nil
   url_to_send_put_request = "/users/#{@scenario_data.users_id[login]}"
   case parameter
   when "имя"
